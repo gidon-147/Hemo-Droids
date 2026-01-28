@@ -10,17 +10,19 @@ from shot import *
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
+    
+    
     pygame.init()
     
     # SCREEN SETTINGS
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
+    
 
     clock = pygame.time.Clock()
     dt = 0
-    p_wid = SCREEN_WIDTH / 2
-    p_hei = SCREEN_HEIGHT / 2
+    wid, hei = screen.get_size()
+    p_wid = wid / 2
+    p_hei = hei / 2
 
     shots = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
@@ -63,8 +65,9 @@ def main():
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
-
+        
         screen.fill("black")
+        wid, hei = screen.get_size()
         for sprite in drawable:
             sprite.draw(screen)
         pygame.display.flip()
